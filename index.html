@@ -128,38 +128,170 @@
       width: fit-content;
     }
 
-    /* ── VIEW SWITCHER NAV (below carousel) ───────────────────── */
-    .view-nav {
-      flex-shrink: 0;
+    /* ── LANDING PAGE ─────────────────────────────────────────── */
+    #view-landing {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      background: var(--canvas);
+    }
+    .landing-intro {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #AAA;
+      margin-bottom: 32px;
       text-align: center;
-      padding: 10px 0;
+    }
+    .landing-buttons {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .landing-btn {
+      position: relative;
+      overflow: hidden;
+      width: 280px;
+      min-height: 200px;
+      padding: 36px 32px;
+      cursor: pointer;
+      background: var(--canvas);
+      border: none;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: color 0.32s;
+    }
+    .landing-btn + .landing-btn {
+      border-left: 1px solid var(--border);
+    }
+    /* fill-from-bottom animation layer */
+    .landing-btn::before {
+      content: '';
+      position: absolute;
+      bottom: -100%; left: 0;
+      width: 100%; height: 100%;
+      transition: bottom 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 0;
+    }
+    .landing-btn:hover::before { bottom: 0; }
+    .landing-btn-ngo::before  { background: var(--ink); }
+    .landing-btn-cit::before  { background: var(--crimson); }
+    .landing-btn:hover .btn-label,
+    .landing-btn:hover .btn-title,
+    .landing-btn:hover .btn-sub,
+    .landing-btn:hover .btn-arrow { color: var(--canvas); }
+    .btn-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #AAA;
+      position: relative; z-index: 1;
+      transition: color 0.32s;
+    }
+    .btn-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--ink);
+      position: relative; z-index: 1;
+      margin: 12px 0 8px;
+      transition: color 0.32s;
+    }
+    .btn-sub {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      color: #888;
+      line-height: 1.7;
+      position: relative; z-index: 1;
+      transition: color 0.32s;
+    }
+    .btn-arrow {
+      font-family: var(--mono);
+      font-size: 18px;
+      color: var(--ink);
+      position: relative; z-index: 1;
+      margin-top: 20px;
+      transition: color 0.32s, transform 0.2s;
+      display: block;
+      width: fit-content;
+    }
+    .landing-btn:hover .btn-arrow { transform: translateX(6px); }
+    .landing-btn-ngo .btn-arrow { color: var(--ink); }
+    .landing-btn-cit .btn-arrow { color: var(--crimson); }
+    .landing-btn-cit .btn-label { color: var(--crimson); }
+
+    /* ── BACK BAR (inside each view) ──────────────────────────── */
+    .back-bar {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 36px;
+      height: 44px;
       border-bottom: 1px solid var(--border);
       background: var(--canvas);
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 0.5px;
     }
-    .view-nav a {
+    .back-bar a {
       color: var(--ink);
       text-decoration: underline;
       text-underline-offset: 3px;
       cursor: pointer;
-      margin: 0 14px;
-      padding: 4px 0;
+      white-space: nowrap;
     }
-    .view-nav a.active {
-      font-weight: bold;
-      background: var(--ink);
-      color: var(--canvas);
-      text-decoration: none;
-      padding: 4px 12px;
+    .back-bar a:hover { color: var(--crimson); }
+    .back-bar .back-sep { color: var(--border); }
+    .back-bar .back-title {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 9px;
+      color: #AAA;
     }
-    .view-nav .vsep { color: var(--border); margin: 0 2px; }
+
+    /* ── PAGE HEADER (generous spacing on sub-pages) ──────────── */
+    .page-header {
+      flex-shrink: 0;
+      padding: 40px 48px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header-title {
+      font-family: var(--serif);
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.1;
+    }
+    .page-header-sub {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #AAA;
+    }
+
+    /* ── PAGE FADE-IN ──────────────────────────────────────────── */
+    @keyframes pgFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .page-enter { animation: pgFade 0.28s ease forwards; }
 
     /* ── VIEW WRAPPERS ────────────────────────────────────────── */
     #view-ngo {
       flex: 1;
-      display: flex;
+      display: none;
       flex-direction: column;
       overflow: hidden;
     }
@@ -167,7 +299,7 @@
       display: none;
       flex: 1;
       flex-direction: column;
-      overflow: hidden;
+      overflow-y: auto;
     }
 
     /* ── DECORATIVE ORNAMENT ──────────────────────────────────── */
@@ -266,7 +398,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 9px 20px;
+      padding: 10px 36px;
       border-bottom: 1px solid var(--border);
       background: var(--canvas);
     }
@@ -585,22 +717,8 @@
     .cit-top {
       flex-shrink: 0;
       border-bottom: 1px solid var(--border);
-      padding: 16px 28px;
+      padding: 20px 48px;
       background: var(--canvas);
-    }
-    .cit-top-title {
-      font-family: var(--serif);
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 4px;
-    }
-    .cit-top-sub {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: #888;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
     }
     .cit-search-row {
       display: flex;
@@ -644,7 +762,7 @@
     .cit-cards-wrap {
       flex: 1;
       overflow-y: auto;
-      padding: 20px 28px;
+      padding: 32px 48px 40px;
     }
     .cit-count {
       font-family: var(--mono);
@@ -828,7 +946,7 @@
 </div>
 
 <!-- ══ NEWS CAROUSEL ══════════════════════════════════════════ -->
-<div class="carousel-wrap">
+<div class="carousel-wrap" id="main-carousel">
 
   <div class="carousel-item active" id="ci-0">
     <div class="carousel-img">
@@ -884,15 +1002,46 @@
 
 </div>
 
-<!-- ══ VIEW SWITCHER (below carousel) ════════════════════════ -->
-<div class="view-nav">
-  <a id="nav-ngo" class="active" onclick="switchView('ngo')">[ View: NGO Workspace ]</a>
-  <span class="vsep">|</span>
-  <a id="nav-citizen" onclick="switchView('citizen')">[ View: Citizen Case Lookup ]</a>
+<!-- ══ LANDING — PORTAL SELECTION ════════════════════════════ -->
+<div id="view-landing">
+  <div class="landing-intro">Select your portal to continue</div>
+  <div class="landing-buttons">
+
+    <button class="landing-btn landing-btn-ngo" onclick="switchView('ngo')">
+      <span class="btn-label">Paralegal Access</span>
+      <div>
+        <div class="btn-title">NGO<br>Workspace</div>
+        <div class="btn-sub">Case Management<br>Legal Drafting<br>Status Tracking</div>
+      </div>
+      <span class="btn-arrow">→</span>
+    </button>
+
+    <button class="landing-btn landing-btn-cit" onclick="switchView('citizen')">
+      <span class="btn-label">Citizen Portal</span>
+      <div>
+        <div class="btn-title">Case<br>Lookup</div>
+        <div class="btn-sub">Find Your Case<br>View Status<br>Next Steps</div>
+      </div>
+      <span class="btn-arrow">→</span>
+    </button>
+
+  </div>
 </div>
 
 <!-- ══ VIEW A — NGO WORKSPACE ═════════════════════════════════ -->
 <div id="view-ngo">
+
+  <div class="back-bar">
+    <a onclick="switchView('home')">← Portal</a>
+    <span class="back-sep">·</span>
+    <span class="back-title">NGO Workspace</span>
+  </div>
+
+  <!-- Page header -->
+  <div class="page-header">
+    <div class="page-header-title">NGO Workspace</div>
+    <div class="page-header-sub">Paralegal access &nbsp;·&nbsp; Case management &nbsp;·&nbsp; Legal drafting</div>
+  </div>
 
   <!-- Password gate -->
   <div id="ngo-gate">
@@ -964,27 +1113,25 @@
 
   </div><!-- /ngo-workspace -->
 
-  <!-- NGO Footer -->
-  <div class="site-footer">
-    <div class="footer-brand">NyayOS</div>
-    <div class="footer-tagline">"Every voice deserves to be heard in court."</div>
-    <div class="footer-meta">Bangalore, India &nbsp;·&nbsp; Legal Infrastructure for Citizen Rights &nbsp;·&nbsp; Vol. I · 2026</div>
-    <div class="footer-links">
-      <span>Digitizing Justice</span><span>·</span>
-      <span>Amplifying Voices</span><span>·</span>
-      <span>Building Accountability</span>
-    </div>
-  </div>
-
 </div><!-- /view-ngo -->
 
 <!-- ══ VIEW B — CITIZEN CASE LOOKUP ══════════════════════════ -->
 <div id="view-citizen">
 
+  <div class="back-bar">
+    <a onclick="switchView('home')">← Portal</a>
+    <span class="back-sep">·</span>
+    <span class="back-title">Citizen Case Lookup</span>
+  </div>
+
+  <!-- Page header -->
+  <div class="page-header">
+    <div class="page-header-title">Citizen Case Lookup</div>
+    <div class="page-header-sub">Search by name &nbsp;·&nbsp; All active cases &nbsp;·&nbsp; PIN required to view details</div>
+  </div>
+
   <!-- Search bar -->
   <div class="cit-top">
-    <div class="cit-top-title">Citizen Case Lookup</div>
-    <div class="cit-top-sub">Search by name &nbsp;·&nbsp; All active cases &nbsp;·&nbsp; PIN required to view details</div>
     <div class="cit-search-row">
       <input class="cit-search-input" type="text" id="cit-search" placeholder="Type a name — e.g. Tinku, Arjun..." oninput="searchCitizenCases()"/>
       <button class="cit-search-btn" onclick="searchCitizenCases()">Search</button>
@@ -998,17 +1145,19 @@
     <div id="citizen-cards"><div class="load-txt">Loading cases...</div></div>
   </div>
 
-  <!-- Citizen Footer -->
-  <div class="site-footer">
-    <div class="footer-brand">NyayOS</div>
-    <div class="footer-tagline">"Built for India. Built for the marginalised. Built to last."</div>
-    <div class="footer-meta">Bangalore, India &nbsp;·&nbsp; Legal Infrastructure for Citizen Rights &nbsp;·&nbsp; Vol. I · 2026</div>
-    <div class="footer-links">
-      <span>For updates, call NyayOS at your registered number</span>
-    </div>
-  </div>
-
 </div><!-- /view-citizen -->
+
+<!-- ══ SHARED FOOTER ══════════════════════════════════════════ -->
+<div class="site-footer">
+  <div class="footer-brand">NyayOS</div>
+  <div class="footer-tagline">"Every voice deserves to be heard in court."</div>
+  <div class="footer-meta">Bangalore, India &nbsp;·&nbsp; Legal Infrastructure for Citizen Rights &nbsp;·&nbsp; Vol. I · 2026</div>
+  <div class="footer-links">
+    <span>Digitizing Justice</span><span>·</span>
+    <span>Amplifying Voices</span><span>·</span>
+    <span>Building Accountability</span>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -1039,12 +1188,23 @@
 
   /* ── VIEW SWITCHER ──────────────────────────────────────────── */
   function switchView(v) {
-    const isNgo = v === 'ngo';
-    document.getElementById('view-ngo').style.display     = isNgo ? 'flex' : 'none';
-    document.getElementById('view-citizen').style.display = isNgo ? 'none' : 'flex';
-    document.getElementById('nav-ngo').classList.toggle('active', isNgo);
-    document.getElementById('nav-citizen').classList.toggle('active', !isNgo);
-    if (!isNgo && !citizenCases.length) loadCitizenCases();
+    var landing  = document.getElementById('view-landing');
+    var ngo      = document.getElementById('view-ngo');
+    var citizen  = document.getElementById('view-citizen');
+    var carousel = document.getElementById('main-carousel');
+
+    landing.style.display  = v === 'home'    ? 'flex' : 'none';
+    ngo.style.display      = v === 'ngo'     ? 'flex' : 'none';
+    citizen.style.display  = v === 'citizen' ? 'flex' : 'none';
+    /* hide carousel on sub-pages so content has full height */
+    carousel.style.display = v === 'home'    ? 'block' : 'none';
+
+    var target = v === 'ngo' ? ngo : v === 'citizen' ? citizen : landing;
+    target.classList.remove('page-enter');
+    void target.offsetWidth;
+    target.classList.add('page-enter');
+
+    if (v === 'citizen' && !citizenCases.length) loadCitizenCases();
   }
 
   /* ── CAROUSEL ───────────────────────────────────────────────── */
