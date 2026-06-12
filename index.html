@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NyayOS — Case Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <title>The Nyay — Case Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -43,10 +43,10 @@
       background: var(--canvas);
     }
     .masthead-brand {
-      font-family: var(--serif);
-      font-size: 62px;
-      font-weight: 700;
-      letter-spacing: -1px;
+      font-family: 'UnifrakturMaguntia', 'Old English Text MT', 'UnifrakturCook', serif;
+      font-size: 72px;
+      font-weight: 400;
+      letter-spacing: 0px;
       line-height: 1;
       color: var(--ink);
     }
@@ -905,9 +905,9 @@
       text-align: center;
     }
     .footer-brand {
-      font-family: var(--serif);
-      font-size: 28px;
-      font-weight: 700;
+      font-family: 'UnifrakturMaguntia', 'Old English Text MT', serif;
+      font-size: 32px;
+      font-weight: 400;
       letter-spacing: -0.5px;
       margin-bottom: 4px;
     }
@@ -939,7 +939,7 @@
 
 <!-- ══ MASTHEAD ═══════════════════════════════════════════════ -->
 <div class="masthead">
-  <div class="masthead-brand">NyayOS</div>
+  <div class="masthead-brand">The Nyay</div>
   <div class="masthead-tagline">Where the law meets the people who need it most.</div>
   <hr class="masthead-rule"/>
   <div class="masthead-meta">Bangalore, India &nbsp;&nbsp;|&nbsp;&nbsp; Legal Infrastructure for Citizen Rights &nbsp;&nbsp;|&nbsp;&nbsp; Vol.&nbsp;I</div>
@@ -1106,7 +1106,7 @@
       <div class="col-detail" id="detail">
         <div class="detail-empty">
           <div class="detail-empty-title">Select a Case</div>
-          <div class="detail-empty-sub">Cases are created automatically when a citizen calls NyayOS</div>
+          <div class="detail-empty-sub">Cases are created automatically when a citizen calls The Nyay</div>
         </div>
       </div>
     </div>
@@ -1149,7 +1149,7 @@
 
 <!-- ══ SHARED FOOTER ══════════════════════════════════════════ -->
 <div class="site-footer">
-  <div class="footer-brand">NyayOS</div>
+  <div class="footer-brand">The Nyay</div>
   <div class="footer-tagline">"Every voice deserves to be heard in court."</div>
   <div class="footer-meta">Bangalore, India &nbsp;·&nbsp; Legal Infrastructure for Citizen Rights &nbsp;·&nbsp; Vol. I · 2026</div>
   <div class="footer-links">
@@ -1747,7 +1747,7 @@ ${escHtml(fields.phone || '')}`;
             '<input class="cit-pin-input" type="password" id="cit-pin-input-' + c.case_id + '" placeholder="Case PIN" />' +
             '<button class="cit-pin-submit" onclick="unlockCitizenCard(\'' + c.case_id + '\')">Unlock →</button>' +
           '</div>' +
-          '<div class="cit-pin-err" id="cit-pin-err-' + c.case_id + '">Invalid PIN. Please contact your NyayOS representative.</div>' +
+          '<div class="cit-pin-err" id="cit-pin-err-' + c.case_id + '">Invalid PIN. Please contact your The Nyay representative.</div>' +
         '</div>' +
 
         '<div class="cit-details" id="cit-details-' + c.case_id + '">' +
@@ -1842,7 +1842,7 @@ ${escHtml(fields.phone || '')}`;
         '<div class="transcript-box">' + escHtml(transcriptText) + '</div>' +
       '</div>' +
 
-      '<div style="font-family:var(--mono);font-size:10px;color:#AAA;margin-top:8px;">For updates, call NyayOS at your registered number.</div>';
+      '<div style="font-family:var(--mono);font-size:10px;color:#AAA;margin-top:8px;">For updates, call The Nyay at your registered number.</div>';
   }
 
   /* ── UTILITIES ──────────────────────────────────────────────── */
